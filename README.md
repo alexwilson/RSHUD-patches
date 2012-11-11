@@ -5,4 +5,6 @@ Pretty much all of the credit here goes towards 'MMM' of the MincraftUser (Japan
 
 Instructions
 ------------
-To install this mod, simply download a zip of this repository and place it under %appdata%/.minecraft/mods (~/.minecraft/mods/ in *NIX environments).
+![INSTALL](http://i.imgur.com/wDUZx.png)
+To install this mod, simply [download a zip of this repository](https://github.com/antoligy/RSHUD-patches/archive/master.zip) and place it under %appdata%/.minecraft/mods (~/.minecraft/mods/ in *NIX environments).
+__NOTE:__ [REQUIRES RISUGAMI'S MODLOADER](http://minecraftforum.net/topic/75440-/).
