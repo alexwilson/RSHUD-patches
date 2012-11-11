@@ -39,7 +39,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 
 	private int lastDamageDealt;
     
-    // マーカー関連
     public boolean isRouteView;
     private int counterCheckWay;
     protected List<double[]> wayPoints;
@@ -197,7 +196,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 		s = "MARKER";
 		drawString(fontRenderer, s, hwSize + 110 - fontRenderer.getStringWidth(s) / 2, hhSize - 110, ColorInt_Maker);
 
-		// サンプル表示用
 		GL11.glEnable(GL11.GL_BLEND);
 		s = "MARKER";
 		fontRenderer.drawString(s, hwSize - fontRenderer.getStringWidth(s) / 2, hhSize - 75, ColorInt_Maker);
@@ -226,7 +224,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 
 		
 		// Route
-        // ルートの判定
 		if (entityRoute == null || entityRoute.isDead || entityRoute.worldObj != mc.theWorld) {
 			entityRoute = new GRV_EntityMARKER(mc.theWorld);
 			setStartRoute(mcpl);
@@ -238,7 +235,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
             checkReRoute(mc.theWorld, mcpl);
 		}
 
-		// 初期設定
         Tessellator tessellator = Tessellator.instance;
 		centerX = i / 2D;
 		centerY = j / 2D;
@@ -339,16 +335,13 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 		GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_LIGHTING);
         
-        // EN
 		float deg;
         float valEN = ((float)mcpl.foodStats.getFoodLevel() + mcpl.foodStats.getSaturationLevel() - (valFoodExh / 4F)) / 40F;
         valEN = Math.max(valEN, 0F);
         int colEN = getTextColor(valEN, 0.4F, 0.1F);
-        // 値
         GL11.glLineWidth(1F);
         setGLTextColor(colEN, 0.5F);
         drawMeter(tessellator, r0 + 2.5D, r0 + 5.0D, 88F, 0F, valEN);
-		// 枠線
         r1 = r0 + 2.0D;
         GL11.glLineWidth(1.5F);
         setGLTextColor(ColorInt_Normal, 1.0F);
@@ -371,14 +364,11 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
         tessellator.draw();
 
         
-        // AP
         float valAP = Math.min((float)mcpl.health + (float)valFoodTimer / 80F, (float)mcpl.getMaxHealth()) / (float)mcpl.getMaxHealth();
         int colAP = getTextColor(valAP, 0.4F, 0.2F);
-		// 値
         GL11.glLineWidth(1F);
         setGLTextColor(colAP, 0.5F);
         drawMeter(tessellator, r0 + 2.5D, r0 + 5.0D, 92F, 180F, valAP);
-        // 枠線
         r1 = r0 + 2.0D;
         GL11.glLineWidth(1.5F);
         setGLTextColor(ColorInt_Normal, 1.0F);
@@ -408,11 +398,9 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
         int colWep = 0;
         if (itemstack != null) {
             if (itemstack.isItemStackDamageable()) {
-        		// 耐久
             	valWep1 = itemstack.getMaxDamage() - itemstack.getItemDamage();
             	valWep2 = (float)valWep1 / (float)itemstack.getMaxDamage();
             } else  {
-        		// 残り
             	valWep1 = itemstack.stackSize;
             	valWep2 = (float)valWep1 / (float)itemstack.getMaxStackSize();
             }
@@ -423,7 +411,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
         }
         int valAmmo = -1;
         int colAmmo = 0;
-        // 弾薬
         if (containsAmmo(itemstack)) {
             valAmmo = countAmmo(itemstack, mcpl);
             float maxammo = (float)itemstack.getMaxDamage();
@@ -432,7 +419,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
             colAmmo = getTextColor(maxammo, 0.3F, 0.1F);
             setGLTextColor(colAmmo, 0.5F);
             drawMeter(tessellator, r0 + 2D, r0 + 3D, 272, 360 - d1, Math.min(1.0F, maxammo));
-            // 枠線
             r1 = r0 + 1.0D;
             setGLTextColor(ColorInt_Normal, 0.8F);
             tessellator.startDrawing(GL11.GL_LINE_STRIP);
@@ -467,7 +453,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
         drawMeter(tessellator, r0 - 3D, r0, 88, d1, valSpeed / 1000F);
         // HEIGHT
 //        float valHeight = (float)(mcpl.posY / (double)mc.theWorld.worldMaxY);
-        // TODO:world側に値があるのね。
         float valHeight = (float)(mcpl.posY / mc.theWorld.getHeight());
         int colHeight = ColorInt_Normal; 
         if (valHeight > 1.0F || valHeight < 0.0F) {
@@ -526,10 +511,8 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
         tessellator.draw();
         GL11.glPopMatrix();
 
-        // 再現
         
         GL11.glLineWidth(1.0F);
-		// 外周
         GL11.glColor4f(1.0F, 1.0F, 1.0F, lf[3] * 0.6F);
         r1 = r0;
         tessellator.startDrawing(GL11.GL_LINE_STRIP);
@@ -549,7 +532,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 		}
         tessellator.draw();
 
-        // 枝
         r2 = r1 - 3D;
         tessellator.startDrawing(GL11.GL_LINES);
 		deg = d1 / 57.29578F;
@@ -582,7 +564,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 		tessellator.addVertex(centerX - ldx, centerY - ldy + 8D, 0D);
         tessellator.draw();
         
-        // 内周
         tessellator.startDrawing(GL11.GL_LINE_STRIP);
 		ldx = centerX + MathHelper.cos(deg2) * r2;
 		ldy = centerY + MathHelper.sin(deg2) * r2;
@@ -655,12 +636,10 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
         	for (int li = 0; li < 3 && entityRoute.routePos[li] != null && entityRoute.markerPos[li] != null; li++) {
             	float lfz = entityRoute.markerPos[li].get(2);
             	if (lfz >= 0.0F && lfz <= 1.0F) {
-            		// クリッピング範囲内
             		flag[li] = true;
             		GL11.glPushMatrix();
             		GL11.glTranslatef(entityRoute.markerPos[li].get(0) / zoomx, j - entityRoute.markerPos[li].get(1) / zoomy, 0.0F);
 //            		GL11.glScalef(0.5F, 0.5F, 0.5F);
-                    // マーカー
         			GL11.glLineWidth(1.5F);
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
             		tessellator.startDrawing(GL11.GL_LINE_LOOP);
@@ -685,7 +664,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
                 		tessellator.draw();
                 		drawOutline(tessellator, -8D, -8D, 8D, 8D, 1D);
             		}
-            		// 距離
             		GL11.glEnable(GL11.GL_TEXTURE_2D);
                     GL11.glScalef(textSize, textSize, textSize);
                     double ld0 = entityRoute.routePos[li][0] - mcpl.posX;
@@ -700,7 +678,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
             		GL11.glPopMatrix();
             	}
             }
-        	// 経路
         	GL11.glLineWidth(5.0F);
         	GL11.glDisable(GL11.GL_TEXTURE_2D);
 			setGLTextColor(ColorInt_Maker, 0.5F);
@@ -733,7 +710,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
         
         
         
-        // 文字
         int txtcolor;
         String s;
         GL11.glPushMatrix();
@@ -872,7 +848,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
             ldy = centerY + 25D;
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             mc.fontRenderer.drawString(valMes, (int)ldx - widMes + 1, (int)ldy, getColorAmp(colMes, iblink ? 0.3F : 1.0F));
-            // 枠
             widMes += 1;
             GL11.glLineWidth(1.0F);
             setGLTextColor(ColorInt_Normal, iblink ? 0.3F : 1.0F);
@@ -919,7 +894,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
             GL11.glPushMatrix();
             GL11.glScalef(0.5F, 0.5F, 0.5F);
 //            GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-            // 状態効果
             for (Iterator iterator = mcpl.getActivePotionEffects().iterator(); iterator.hasNext();) {
                 PotionEffect potioneffect = (PotionEffect)iterator.next();
                 int lpid = potioneffect.getPotionID();
@@ -930,16 +904,13 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
                 float lx = (float)(lpid & 0x03);
                 GL11.glPushMatrix();
                 GL11.glTranslatef(20F + lx * 30F, (float)mc.displayHeight - 80F - lx * 40F - (lpid >>> 2) * 50F, 0F);
-                // 書き文字
                 int widMes = mc.fontRenderer.getStringWidth(s) / 2;
                 mc.fontRenderer.drawString(s, 64 - widMes, 19, getColorAmp(potion.isBadEffect() ? ColorInt_Alert : ColorInt_Normal, 0.8F));
-                // 枠
                 int lk = mc.renderEngine.getTexture("/gui/rshud_acvstatus.png");
                 mc.renderEngine.bindTexture(lk);
                 drawTexturedModalRect(0, 0, 0, potion.isBadEffect() ? 0 : 48, 128, 45);
                 GL11.glPopMatrix();
             }
-            // エンチャント
             if (itemstack != null && itemstack.hasTagCompound()) {
                 NBTTagList nbttaglist = itemstack.getEnchantmentTagList();
 
@@ -955,10 +926,8 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
                           	float ly = (float)(word0 >>> 3);
                           	GL11.glPushMatrix();
                           	GL11.glTranslatef((float)mc.displayWidth - 148F - ly * 16F, (float)mc.displayHeight - 80F - ly * 40F - lx * 50F, 0F);
-                          	// 書き文字
                           	int widMes = mc.fontRenderer.getStringWidth(s) / 2;
                           	mc.fontRenderer.drawString(s, 64 - widMes, 19, getColorAmp(ColorInt_Normal, 0.8F));
-                          	// 枠
                           	int lk = mc.renderEngine.getTexture("/gui/rshud_acvstatus.png");
                           	mc.renderEngine.bindTexture(lk);
                           	drawTexturedModalRect(0, 0, 0, 48, 128, 45);
@@ -970,7 +939,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
             GL11.glPopMatrix();
         }
         
-        // 後始末
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -1072,7 +1040,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 	}
 	
 	public void toggleRouteView(EntityPlayer entityplayer) {
-		// ルート表示の切り替え
 		isRouteView = !isRouteView;
 		if (entityplayer != null) {
 			if (isRouteView) {
@@ -1087,7 +1054,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 	}
 	
 	public void setStartRoute(EntityPlayer entityplayer) {
-		// スタート地点の設定
 		System.out.println("start Route.");
 		lastWayPoint = new double[] {
 				entityplayer.posX, 
@@ -1111,14 +1077,12 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 	}
 	
 	public boolean checkRoutePoint(World world, EntityPlayer entityplayer) {
-		// チェックポイントの追加判定
 		boolean flag = false;
 		if (world == null || lastWayPoint == null) return false;
 		Vec3 vec1 = entityplayer.getPosition(1.0F);
 		vec1.yCoord -= entityplayer.yOffset - 0.7D;
 		MovingObjectPosition mo = world.rayTraceBlocks_do_do(Vec3.createVectorHelper(lastWayPoint[0], lastWayPoint[1], lastWayPoint[2]), vec1, false, true);
 		if (mo != null) {
-			// ポイントの追加
 			wayPoints.add(nowWayPoint);
 			lastWayPoint = nowWayPoint;
     		System.out.println(String.format("Add Route(%d).", wayPoints.size()));
@@ -1137,7 +1101,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 	}
 	
 	public void checkReRoute(World world, EntityPlayer entityplayer) {
-		// チェックポイントからの可視判定を行う
 		if (wayPoints.size() <= 1) return;
 		if (counterCheckWay < 0) counterCheckWay = 0;
 		double[] ldd = wayPoints.get(counterCheckWay);
@@ -1146,12 +1109,9 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 			vec1.yCoord -= entityplayer.yOffset - 0.7D;
 			MovingObjectPosition mo = world.rayTraceBlocks_do_do(Vec3.createVectorHelper(ldd[0], ldd[1], ldd[2]), vec1, false, true);
 			if (mo == null) {
-				// 視線が通る
-				// 以降のリストを削除
 				while (wayPoints.size() > counterCheckWay + 1) {
 					wayPoints.remove(wayPoints.size() - 1);
 				}
-				// ルートの再設定
 				entityRoute.routePos[0] = null;
 				entityRoute.routePos[1] = null;
 				entityRoute.routePos[2] = null;
@@ -1172,7 +1132,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 	
 	
 	private void drawRECON(Tessellator tessellator, Minecraft lmc, GRV_EntityRECON pEntityRECON) {
-		// RECONのマーカー
 		if (entityRoute == null || !pEntityRECON.enable) return;
 			
 		FloatBuffer posMarker = BufferUtils.createFloatBuffer(3);
@@ -1184,7 +1143,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 				GRV_RenderMARKER.matModel, GRV_RenderMARKER.matProjection, GRV_RenderMARKER.matViewport, posMarker);
 
 		if (posMarker.get(2) >= 0.0F && posMarker.get(2) <= 1.0F) {
-			// 画面内にマーカーがある
 			int lcolor = ColorInt_Maker;
 			if (pEntityRECON.getCountEnemy() > 0) {
 				lcolor = ColorInt_Alert;
@@ -1211,7 +1169,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 			lstr = String.format("RECON %3d", pEntityRECON.index + 1);
 			lmc.fontRenderer.drawString(lstr, lw, (int)(ly -lmc.fontRenderer.FONT_HEIGHT * 3), lcolor);
 		} else {
-			// マーカーは画面外
 			
 		}
 		GL11.glPopMatrix();
@@ -1219,7 +1176,6 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 
 	
 	private int getTextColor(float percent, float levelwarning, float levelalart) {
-		// 割合に応じて色を返す
 		if (levelalart >= percent) {
 			return ColorInt_Alert;
 		}
@@ -1236,20 +1192,17 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure {
 	}
 	
 	private void setGLTextColor(int textColor, float alphaRate) {
-		// 色を設定する
 		float[] colf = getRGBA(textColor);
 		GL11.glColor4f(colf[0],	colf[1], colf[2], colf[3] * alphaRate);
 	}
 	
 	public static void addRECONSensing(Entity pentity) {
-		// RECONで検出したターゲットを追加
 		if (!viewRECONEntitys.contains(pentity)) {
 			viewRECONEntitys.add(pentity);
 		}
 	}
 	
 	public static void clearRECONSensing() {
-		// RECONで検出したターゲットを消去
 		if (!isRECONUpdate) {
 			viewRECONEntitys.clear();
 		}

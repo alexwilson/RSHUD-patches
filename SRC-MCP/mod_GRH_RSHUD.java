@@ -22,7 +22,7 @@ public class mod_GRH_RSHUD extends BaseMod {
 	public static String Color_Normal = "cc4cff7f";
 	@MLProp(info="Warning Message Color.")
 	public static String Color_Warning = "e5ffff00";
-	@MLProp(info="Alert Messaege Color.")
+	@MLProp(info="Alert Message Color.")
 	public static String Color_Alert = "e5ff0000";
 	@MLProp(info="Line Alpha Value.", min=0.0F, max=1.0F)
 	public static float LineAlpha = 0.8F;
@@ -35,9 +35,9 @@ public class mod_GRH_RSHUD extends BaseMod {
 	public static String projectionArms = "261:262;";
 	@MLProp(info="Replace GuiIngame.")
 	public static boolean replaceGuiIngame = false;
-	@MLProp(info="GUI Enable(dont't use GUI is false)")		// GUIの有効無効
+	@MLProp(info="GUI Enable(dont't use GUI is false)")
 	public static boolean guiEnable = true;
-	@MLProp(info="Default HUD")								// HUDの表示
+	@MLProp(info="Default HUD")
 	public static String HUDName = "TypeA";
 
 	
@@ -51,25 +51,22 @@ public class mod_GRH_RSHUD extends BaseMod {
 	
 	@Override
 	public String getVersion() {
-		return "1.3.2-2";
+		return "1.4.2";
 	}
 
 	@Override
 	public String getPriorities() {
-		// 最初に読み込まれますように
 		return "before:*";
 	}
 	
 	@Override
 	public void load() {
-       	// ゲーム起動後の設定用フック
 		if (replaceGuiIngame) {
 			ModLoader.setInGUIHook(this, true, false);
 		} else {
 	       	ModLoader.setInGameHook(this, true, false);
 		}
 		
-        // GUI を開くキーの登録と名称変換テーブルの登録
 		if (guiEnable) {
 			String s = "key.RSHUD";
 			guiKey = new KeyBinding(s, 25);
@@ -80,12 +77,10 @@ public class mod_GRH_RSHUD extends BaseMod {
 	        		);
 		}
 
-		// HUDの登録
 		selectHUD = null;
 		addHUD(new GRH_GuiRSHUDConfigure(this));
 		addHUD(rshud = new GRH_GuiRSHUD_TypeA(this));
 
-		// 色の生成、普通にやると32Bitの変換ができないので小細工
 		Color_Normal = "00000000".concat(Color_Normal);
 		Color_Normal = Color_Normal.substring(Color_Normal.length() - 8);
 		Color_Warning = "00000000".concat(Color_Warning);
@@ -104,7 +99,6 @@ public class mod_GRH_RSHUD extends BaseMod {
 
 	@Override
 	public void modsLoaded() {
-		// 投射体リストの解析
        	String[] w1 = projectionArms.split(";");
        	for (int i = 0; i < w1.length; i++) {
            	String[] w2 = w1[i].split(":");
@@ -120,7 +114,6 @@ public class mod_GRH_RSHUD extends BaseMod {
 	
 	@Override
 	public void keyboardEvent(KeyBinding keybinding) {
-    	// GUIを開く
     	Minecraft mcGame = ModLoader.getMinecraftInstance();
     	if (mcGame.theWorld != null && mcGame.currentScreen == null) {
         	ModLoader.openGUI(mcGame.thePlayer, selectHUD);
@@ -129,9 +122,7 @@ public class mod_GRH_RSHUD extends BaseMod {
 	
     @Override
     public boolean onTickInGUI(float f, Minecraft minecraft, GuiScreen guiscreen) {
-    	// アイテムレンダーをオーバーライド
     	minecraft.ingameGUI = new GRH_GuiIngameRSHUD(minecraft);
-        // 一回でいい
         return false;
     }
 
@@ -173,7 +164,6 @@ public class mod_GRH_RSHUD extends BaseMod {
         {
 //    	System.out.println("write property.");
     	HUDName = selectHUD.getHUDName();
-    	// ModLoaderから丸パクリ
     		Logger logger = ModLoader.getLogger();
     		Class class1 = basemod.getClass();
             Properties properties = new Properties();

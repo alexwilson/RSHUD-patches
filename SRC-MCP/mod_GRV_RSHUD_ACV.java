@@ -34,7 +34,7 @@ public class mod_GRV_RSHUD_ACV extends BaseMod {
 	
 	@Override
 	public String getVersion() {
-		return "1.3.2-2";
+		return "1.4.2";
 	}
 
 	@Override
@@ -48,7 +48,6 @@ public class mod_GRV_RSHUD_ACV extends BaseMod {
 			rshud = new GRV_GuiRSHUD_ACV(this);
 			mod_GRH_RSHUD.addHUD(rshud);
 			
-			// èâä˙ílÇÃì«Ç›çûÇ›
 	        Color_Normal = "00000000".concat(Color_Normal);
 	        Color_Normal = Color_Normal.substring(Color_Normal.length() - 8);
 	        Color_Warning = "00000000".concat(Color_Warning);
@@ -76,7 +75,6 @@ public class mod_GRV_RSHUD_ACV extends BaseMod {
 	        if (itemIDRECON > 0) {
 				itemRECON = (new GRV_ItemRECON(itemIDRECON - 256)).setIconCoord(14, 0).setItemName("recon");
 		        ModLoader.addName(itemRECON, "RECON");
-//		        ModLoader.addName(itemRECON, "ja_JP", "íTç∏ã@");
 		        ModLoader.addRecipe(new ItemStack(itemRECON, 8), new Object[] {
 					"E", 
 					"R", 

@@ -10,9 +10,7 @@ public class GRV_ItemRECON extends ItemSnowball {
 		setMaxStackSize(64);
 	}
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        // RECONéÀèo
+	@Override public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		if (!par3EntityPlayer.capabilities.isCreativeMode) {
             par1ItemStack.stackSize--;
         }
@@ -26,7 +24,6 @@ public class GRV_ItemRECON extends ItemSnowball {
         return par1ItemStack;
 	}
 
-	@Override
 	public int getColorFromDamage(int par1, int par2) {
 		return 0xff888888;
 	}

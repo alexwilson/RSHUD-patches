@@ -61,7 +61,6 @@ public class GRH_ContainerRSHUD extends ContainerCreative {
 	}
 
     private void initAllSelections() {
-    	// コンテナ表示用アイテムの設定
     	this.itemList.clear();
         Item[] var2 = Item.itemsList;
         int var3 = var2.length;
@@ -75,14 +74,12 @@ public class GRH_ContainerRSHUD extends ContainerCreative {
         }
     }
 	
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer) {
+	@Override public boolean canInteractWith(EntityPlayer entityplayer) {
 		return true;
 	}
 	
 	
-	@Override
-    public void scrollTo(float f) {
+	@Override public void scrollTo(float f) {
         int i = (itemList.size() / 8 - 5) + 1;
         int j = (int)((double)(f * (float)i) + 0.5D);
         if(j < 0)
@@ -107,11 +104,10 @@ public class GRH_ContainerRSHUD extends ContainerCreative {
 
     }
 
-	@Override
-	public ItemStack slotClick(int i, int j, boolean flag,
+//	@Override 
+    public ItemStack slotClick(int i, int j, boolean flag,
 			EntityPlayer entityplayer) {
 		if (i >= 40) {
-			// セットされたアイテムを定義
 			int lk = (i - 40) / 7 + weaponOffset;
 			for (; weaponList.size() <= lk;) {
 				weaponList.add(new ArrayList<ItemStack>());
@@ -127,7 +123,8 @@ public class GRH_ContainerRSHUD extends ContainerCreative {
 		if (i == -999) {
 			entityplayer.inventory.setItemStack(null);
 		}
-		ItemStack is = super.slotClick(i, j, flag, entityplayer);
+        int iflag = flag ? 1 : 0;
+		ItemStack is = super.slotClick(i, j, iflag, entityplayer);
 
 		return is;
 	}

@@ -108,7 +108,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
 		s = "ALERT";
 		drawString(fontRenderer, s, hwSize + 110 - fontRenderer.getStringWidth(s) / 2, hhSize + 2, ColorInt_Alert);
 
-		// サンプル表示用
 		GL11.glEnable(GL11.GL_BLEND);
 		s = "WARNING";
 		fontRenderer.drawString(s, hwSize - fontRenderer.getStringWidth(s) / 2, hhSize - 50, ColorInt_Warning);
@@ -118,7 +117,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
 	}
 
 	public void renderRSHUD(Minecraft mc, int i, int j) {
-		// HUDの表示
 //		if (!mod_RSHUD.HUDEnable) return;
 		
 		double xcenter = i / 2D;
@@ -137,7 +135,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
         double ldx;
         double ldy;
 
-        // 方位
         ldx = 0D - mcpl.rotationYaw % 10D;
         int liy = (int)(mcpl.rotationYaw / 10F) * 2;
 //        System.out.println(String.format("%f", mcpl.rotationYaw));
@@ -154,7 +151,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
             ldx += 5D;
         }
         tessellator.draw();
-        // センターマーカー
         ldy = ycenter - 90D;
         tessellator.startDrawing(GL11.GL_LINE_LOOP);
         tessellator.addVertex(xcenter, ldy, 0.0D);
@@ -164,7 +160,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
 
         
         
-        // ピッチ
         ldx = xcenter;
         ldy = ycenter - 105D - (mcpl.rotationPitch % 10D * 3D);
         int lip = (int)(mcpl.rotationPitch / 10F) * 2;
@@ -211,7 +206,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
         tessellator.draw();
         
         
-        // 速度
         double lvx = mcpl.lastTickPosX - mcpl.posX;
         double lvy = mcpl.lastTickPosY - mcpl.posY;
         double lvz = mcpl.lastTickPosZ - mcpl.posZ;
@@ -228,7 +222,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
             ldy += 5D;
         }
         tessellator.draw();
-        // 数字枠
         tessellator.startDrawing(GL11.GL_LINE_LOOP);
         ldx = xcenter - 160D;;
         ldy = ycenter - 4D;
@@ -239,7 +232,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
         tessellator.draw();
         
         
-        // 高度
         tessellator.startDrawing(GL11.GL_LINES);
         ldy = 0D + ((mc.thePlayer.posY * 10) % 10);
         for (int li1 = 0; li1 < j / 5; li1++) {
@@ -252,7 +244,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
             ldy += 5D;
         }
         tessellator.draw();
-        // 数字枠
         tessellator.startDrawing(GL11.GL_LINE_LOOP);
         ldx = xcenter + 115D;;
         ldy = ycenter - 4D;
@@ -262,7 +253,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
         tessellator.addVertex(ldx, ldy + 11D, 0.0D);
         tessellator.draw();
         
-        // 鎧枠
         tessellator.startDrawing(GL11.GL_LINE_LOOP);
         ldx = xcenter - 160D;;
         ldy = j - 70D;
@@ -272,19 +262,16 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
         tessellator.addVertex(ldx, ldy + 60D, 0.0D);
         tessellator.draw();
 /*
-        // リスポーンポイント
         ChunkCoordinates chunkcoordinates = null;
         ChunkCoordinates chunkcoordinates1 = null;
         boolean flag2 = true;
         if(mcpl != null) {
-        	// ベッドリスポン
             chunkcoordinates = mcpl.getPlayerSpawnCoordinate();
             if(chunkcoordinates != null) {
                 chunkcoordinates1 = EntityPlayer.verifyRespawnCoordinates(mc.theWorld, chunkcoordinates);
             }
         }
         if(chunkcoordinates1 == null) {
-        	// ワールドリスポン
             chunkcoordinates1 = mc.theWorld.getSpawnPoint();
             flag2 = false;
         }
@@ -308,13 +295,10 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
         tessellator.draw();
         GL11.glPopMatrix();
 */        
-        // 後始末
         GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
 
-        // 文字の描画
         String s;
         int txtcolor = ColorInt_Normal;
-        // 方位
         int deg = (int)(mcpl.rotationYaw/ 10F) * 2;
         ldx = 0D - mcpl.rotationYaw % 10D;
         for (int li1 = -i / 10; li1 < i / 10; li1++) {
@@ -328,7 +312,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
             }
             ldx += 5D;
         }
-        // 速度
         ldy = 0D + (vmove * 10D % 10D);
         for (int li1 = -j / 20; li1 < j / 20; li1++) {
         	int li2 = (int)(vmove) - li1;
@@ -342,7 +325,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
         }
         s = String.format("%.1f", vmove);
         mc.fontRenderer.drawString(s, (int)xcenter - 120 - mc.fontRenderer.getStringWidth(s), j / 2 - 2, txtcolor);
-        // 高度
         ldy = 0D + ((mc.thePlayer.posY * 10) % 10);
         for (int li1 = -j / 20; li1 < j / 20; li1++) {
         	int li2 = (int)mc.thePlayer.posY - li1;
@@ -357,7 +339,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
 //        s = String.format("%5.1f", mc.thePlayer.posY);
         s = String.format("%.1f", mc.thePlayer.posY);
         mc.fontRenderer.drawString(s, (int)xcenter + 155 - mc.fontRenderer.getStringWidth(s), j / 2 - 2, txtcolor);
-        // ピッチ
         ldx = xcenter;
         ldy = (double)j / 2D - 105D - (mcpl.rotationPitch % 10D * 3D) - 3D;
         for (int li1 = -7; li1 < 7; li1++) {
@@ -370,24 +351,22 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
             ldy += 15D;
         }
         
-        // 状態表示
         txtcolor = ColorInt_Normal;
         if (mcpl.health < 9) {
         	// HP Low
-        	s = "ALEART HEALTH";
+        	s = "WARN HEALTH";
             txtcolor = mcpl.health < 5 ? ColorInt_Alert : ColorInt_Warning;
             mc.fontRenderer.drawString(s, (int)xcenter - mc.fontRenderer.getStringWidth(s) / 2, (int)ycenter - 80, txtcolor);
         }
         if (mcpl.foodStats.getFoodLevel() < 7) {
         	// FOOD Low
-        	s = "ALEART FOOD";
+        	s = "ALERT FOOD";
             txtcolor = mcpl.health < 5 ? ColorInt_Alert : ColorInt_Warning;
             mc.fontRenderer.drawString(s, (int)xcenter - mc.fontRenderer.getStringWidth(s) / 2, (int)ycenter - 70, txtcolor);
         }
         
         ItemStack is = mcpl.inventory.getCurrentItem();
         if (is != null && is.isItemStackDamageable()) {
-        	// 消耗品
             int cdamage = is.getMaxDamage() - is.getItemDamage();
             if (((float)is.getItemDamage() / (float)is.getMaxDamage()) > 0.9F) {
                 txtcolor = ColorInt_Alert;
@@ -421,8 +400,6 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
             }
             mc.fontRenderer.drawString(s, (int)xcenter - mc.fontRenderer.getStringWidth(s) + 50, (int)ycenter + 54, txtcolor);
         }
-        
-        // 鎧
         int lx = (int)xcenter - 143;
         int ly = j - 62;
         float f;
@@ -463,10 +440,7 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure {
             lx += 6;
             drawRectL(lx, ly, lx + 5, ly + 7, txtcolor);
         }
-
-        // 後始末
         GL11.glDisable(3042 /*GL_BLEND*/);
-
 	}
 	
 	

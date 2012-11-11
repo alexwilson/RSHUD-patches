@@ -30,16 +30,13 @@ public class GRH_GuiContainerRSHUD extends GuiContainer {
 //        entityplayer.craftingInventory.windowId = 120;
 	}
 
-	@Override
-    protected void keyTyped(char c, int i) {
+	@Override protected void keyTyped(char c, int i) {
         if(i == 1 || i == mod_GRH_RSHUD.guiKey.keyCode) {
         	mc.displayGuiScreen(owner);
         }
     }
 	
-	@Override
-	public void onGuiClosed() {
-		// 設定値のデコード
+	@Override public void onGuiClosed() {
 		GRH_GuiRSHUDConfigure.projectorList.clear();
 		for (int i = 0; i < ((GRH_ContainerRSHUD)inventorySlots).weaponList.size(); i++) {
 			List<ItemStack> list1 = ((GRH_ContainerRSHUD)inventorySlots).weaponList.get(i);
@@ -52,7 +49,6 @@ public class GRH_GuiContainerRSHUD extends GuiContainer {
 				}
 				if (list2.isEmpty()) continue;
 				if (GRH_GuiRSHUDConfigure.projectorList.containsKey(list1.get(0).getItem().shiftedIndex)) {
-					// キーがある
 					GRH_GuiRSHUDConfigure.projectorList.get(list1.get(0).getItem().shiftedIndex).addAll(list2);
 				} else {
 					GRH_GuiRSHUDConfigure.projectorList.put(list1.get(0).getItem().shiftedIndex, list2);
@@ -73,13 +69,11 @@ public class GRH_GuiContainerRSHUD extends GuiContainer {
 		super.onGuiClosed();
 	}
 	
-	@Override
-	public boolean doesGuiPauseGame() {
+	@Override public boolean doesGuiPauseGame() {
 		return true;
 	}
 	
-	@Override
-	protected void handleMouseClick(Slot slot, int i, int j, boolean flag) {
+    protected void handleMouseClick(Slot slot, int i, int j, boolean flag) {
         if(slot != null)
         {
             if(slot.inventory == inventory1)
@@ -87,7 +81,6 @@ public class GRH_GuiContainerRSHUD extends GuiContainer {
                 InventoryPlayer inventoryplayer = mc.thePlayer.inventory;
                 ItemStack itemstack1 = inventoryplayer.getItemStack();
                 ItemStack itemstack4 = slot.getStack();
-                // 二つは同じID
                 if(itemstack1 != null && itemstack4 != null && itemstack1.itemID == itemstack4.itemID)
                 {
                     if(j == 0)
@@ -128,27 +121,25 @@ public class GRH_GuiContainerRSHUD extends GuiContainer {
                 }
             } else
             {
-                inventorySlots.slotClick(slot.slotNumber, j, flag, mc.thePlayer);
+                int iflag = flag ? 1 : 0;
+                inventorySlots.slotClick(slot.slotNumber, j, iflag, mc.thePlayer);
                 ItemStack itemstack = inventorySlots.getSlot(slot.slotNumber).getStack();
                 mc.playerController.sendSlotPacket(itemstack, (slot.slotNumber - inventorySlots.inventorySlots.size()) + 9 + 36);
             }
         } else
         {
-        	// Slot以外なら捨てる
             InventoryPlayer inventoryplayer1 = mc.thePlayer.inventory;
             inventoryplayer1.setItemStack(null);
         }
     }
 
-	@Override
     protected void drawGuiContainerForegroundLayer()
     {
         fontRenderer.drawString("Item selection", 8, 6, 0x404040);
         fontRenderer.drawString("Weapon and Ammo", 8, 110, 0x404040);
     }
 
-	@Override
-    public void handleMouseInput()
+	@Override public void handleMouseInput()
     {
         super.handleMouseInput();
         int i = Mouse.getEventDWheel();
@@ -197,8 +188,7 @@ public class GRH_GuiContainerRSHUD extends GuiContainer {
         }
     }
 
-	@Override
-    public void drawScreen(int i, int j, float f)
+	@Override public void drawScreen(int i, int j, float f)
     {
     	lastX = i;
     	lastY = j;
@@ -256,8 +246,7 @@ public class GRH_GuiContainerRSHUD extends GuiContainer {
     }
 
 	
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+	@Override protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int k = mc.renderEngine.getTexture("/gui/rshudcontainer.png");
         mc.renderEngine.bindTexture(k);

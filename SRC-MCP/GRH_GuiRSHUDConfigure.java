@@ -46,7 +46,6 @@ public class GRH_GuiRSHUDConfigure extends GuiScreen {
 	
 	@Override
 	public void onGuiClosed() {
-		// ƒvƒƒpƒeƒB‚Ì•Û‘¶
 		try {
 			mod_GRH_RSHUD.setupProperties(modbase);
 			if (modbase != mod_GRH_RSHUD.instance) {
@@ -102,26 +101,21 @@ public class GRH_GuiRSHUDConfigure extends GuiScreen {
 	}
 	
 	public String getHUDName() {
-		// HUD‚Ì–¼‘O
 		return "HUD OFF";
 	}
 	
 	public void renderRSHUD(Minecraft mc, int i, int j) {
-		// HUD‚Ì•`‰æ
 	}
 
 	public void renderRSHUD(Minecraft mc, int i, int j, float f) {
-		// HUD‚Ì•`‰æ
 		renderRSHUD(mc, i, j);
 	}
 
 	public boolean containsAmmo(ItemStack itemstack) {
-		// ’e–ò‚ª“o˜^‚³‚ê‚Ä‚¢‚é‚©
 		return itemstack != null && projectorList.containsKey(itemstack.getItem().shiftedIndex);
 	}
 	
 	public int countAmmo(ItemStack itemstack, EntityPlayer entityplayer) {
-		// ‘Î‰’e–ò‚ÌŠ”‚ğ•Ô‚·
         int count = 0;
         List<Integer> clist = projectorList.get(itemstack.getItem().shiftedIndex);
         for (int li1 = 0; li1 < entityplayer.inventory.mainInventory.length; li1++) {
@@ -179,7 +173,6 @@ public class GRH_GuiRSHUDConfigure extends GuiScreen {
 	}
 	
 	
-	// c’eŠm”F—p
 	public int getCurrentEquipItemLoad() {
 		return 0;
 	}

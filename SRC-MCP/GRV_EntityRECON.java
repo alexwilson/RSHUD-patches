@@ -7,7 +7,6 @@ import javax.transaction.xa.Xid;
 
 public class GRV_EntityRECON extends EntityThrowable {
 	
-	// TODO:継承関係が変わったら修正
 	private int xTile;
     private int yTile;
     private int zTile;
@@ -42,10 +41,8 @@ public class GRV_EntityRECON extends EntityThrowable {
     protected void entityInit() {
     	super.entityInit();
 
-    	// 初期化
     	targetEntity = null;
     	enable = false;
-    	// デフォルトでは３０秒
     	batteryCount = 600;
     }
     
@@ -72,7 +69,6 @@ public class GRV_EntityRECON extends EntityThrowable {
 //            targetEntity = movingobjectposition.entityHit;
             setDead();
         } else {
-        	// 壁に当たった
             xTile = movingobjectposition.blockX;
             yTile = movingobjectposition.blockY;
             zTile = movingobjectposition.blockZ;
@@ -91,7 +87,6 @@ public class GRV_EntityRECON extends EntityThrowable {
             setPrivates();
         }
 
-        // プレーヤーのレベルに応じて起動個数を決定
         if (thrower instanceof EntityPlayer) {
             int lwakeCount = ((EntityPlayer)thrower).experienceLevel / 10;
             List llist = worldObj.getLoadedEntityList();
@@ -104,7 +99,6 @@ public class GRV_EntityRECON extends EntityThrowable {
             		}
             	}
             }
-            // 起動
             enable = true;
             index = 0;
             
@@ -117,7 +111,6 @@ public class GRV_EntityRECON extends EntityThrowable {
 	public void onUpdate() {
 		getPrivates();
 		if (targetEntity != null) {
-			// くっつき虫
 			xTile = (int)(posX - 0.5D);
 			yTile = (int)posY;
 			zTile = (int)(posZ - 0.5D);
@@ -129,13 +122,10 @@ public class GRV_EntityRECON extends EntityThrowable {
 		
 		if (enable) {
 			if (batteryCount-- < 0) {
-				// バッテリー切れ
 				setDead();
 			}
 
-			// TODO: 1.3.1の不具合対策、ホントは！が要らない、むしろ逆
 			if (worldObj.isRemote) {
-				// 有効範囲内のMOBを取得
 				countOther = 0;
 				countEnemy = 0;
 				List llist1 = worldObj.getEntitiesWithinAABB(EntityLiving.class, boundingBox.expand(8D, 8D, 8D));
