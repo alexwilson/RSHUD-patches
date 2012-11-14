@@ -19,8 +19,8 @@ public class GRV_EntityRECON extends EntityThrowable {
 	public int index;
 	private int countEnemy;
 	private int countOther;
+	public EntityLiving thrower;
 
-	
 	
     public GRV_EntityRECON(World par1World)
     {
