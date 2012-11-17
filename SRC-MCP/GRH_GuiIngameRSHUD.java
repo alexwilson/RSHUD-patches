@@ -9,18 +9,20 @@ import org.lwjgl.util.glu.GLU;
 
 import net.minecraft.client.Minecraft;
 
-public class GRH_GuiIngameRSHUD extends GuiIngame {
+public class GRH_GuiIngameRSHUD extends GuiIngame
+{
+    private Minecraft mc;
 
-	private Minecraft mc;
-	
-	public GRH_GuiIngameRSHUD(Minecraft minecraft) {
-		super(minecraft);
-		mc = minecraft;
-	}
-	
-	@Override
-	public void renderGameOverlay(float f, boolean flag, int i, int j) {
-		super.renderGameOverlay(f, flag, i, j);
+    public GRH_GuiIngameRSHUD(Minecraft minecraft)
+    {
+        super(minecraft);
+        mc = minecraft;
+    }
+
+    @Override
+    public void renderGameOverlay(float f, boolean flag, int i, int j)
+    {
+        super.renderGameOverlay(f, flag, i, j);
         ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         int k = scaledresolution.getScaledWidth();
         int l = scaledresolution.getScaledHeight();
@@ -29,8 +31,5 @@ public class GRH_GuiIngameRSHUD extends GuiIngame {
         {
             mod_GRH_RSHUD.selectHUD.renderRSHUD(mc, k, l);
         }
-	}
-	
-	
-
+    }
 }
