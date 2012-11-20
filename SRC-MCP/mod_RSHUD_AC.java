@@ -31,6 +31,7 @@ public class mod_RSHUD_AC extends BaseMod
     @MLProp(info = "Degree Offset.", min = 0, max = 36)
     public static int DegOffset = 18;
     public static KeyBinding guiKey;
+    public static GuiRSHUD_AC guirshud_ac;
 
     public mod_RSHUD_AC()
     {
@@ -39,7 +40,7 @@ public class mod_RSHUD_AC extends BaseMod
     @Override
     public String getVersion()
     {
-        return "1.4.2";
+        return "1.4.5";
     }
 
     @Override

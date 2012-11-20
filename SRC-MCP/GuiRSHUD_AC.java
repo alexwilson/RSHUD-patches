@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiRSHUD_AC extends GRH_GuiRSHUDConfigure
 {
-	private GRH_GuiRSHUDSlider colornumber[];
+    private GRH_GuiRSHUDSlider colornumber[];
     public int ColorInt_Number;
     public int ColorInt_Iron;
     public int ColorInt_Gold;

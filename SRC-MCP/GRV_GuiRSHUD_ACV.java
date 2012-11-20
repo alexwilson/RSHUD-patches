@@ -332,7 +332,7 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure
                         GL11.glPopMatrix();
                         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-                        if (lentity1 instanceof IMob || lentity1 instanceof IRangedAttackMob || lentity1 instanceof EntityEnderman || lentity1 instanceof EntityBat ||  (lentity1 instanceof EntityWolf && ((EntityWolf)lentity1).isAngry()))
+                        if (lentity1 instanceof IMob || lentity1 instanceof IRangedAttackMob || lentity1 instanceof EntityEnderman || lentity1 instanceof EntityBat || (lentity1 instanceof EntityWolf && ((EntityWolf)lentity1).isAngry()))
                         {
                             GL11.glColorMask(true, false, false, true);
                         }

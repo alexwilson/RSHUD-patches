@@ -67,17 +67,20 @@ public class GRV_EntityRECON extends EntityThrowable
     @Override
     protected void onImpact(MovingObjectPosition movingobjectposition)
     {
-/*    	if (!worldObj.multiplayerWorld) {
-    		setDead();
-    	}
-*/    	
+        /*    	if (!worldObj.multiplayerWorld) {
+            		setDead();
+            	}
+        */
         if (movingobjectposition.entityHit != null)
         {
             movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, func_85052_h()), 6);
+
 //          targetEntity = movingobjectposition.entityHit;
-            for (int i = 0; i < 8; ++i) {
-	            worldObj.spawnParticle("explosion", this.posX, this.posY, this.posZ + 0.5D, 0.0D, 0.0D, 0.0D);
-	        }
+            for (int i = 0; i < 8; ++i)
+            {
+                worldObj.spawnParticle("explosion", this.posX, this.posY, this.posZ + 0.5D, 0.0D, 0.0D, 0.0D);
+            }
+
             setDead();
         }
         else
@@ -103,7 +106,6 @@ public class GRV_EntityRECON extends EntityThrowable
         if (func_85052_h() instanceof EntityPlayer)
         {
             int lwakeCount = ((EntityPlayer)func_85052_h()).experienceLevel / 10;
-
             List llist = worldObj.getLoadedEntityList();
 
             for (int li = 0; li < llist.size(); li++)
@@ -130,7 +132,7 @@ public class GRV_EntityRECON extends EntityThrowable
 
     @Override
     public void onUpdate()
-    {	
+    {
         getPrivates();
 
         if (targetEntity != null)
