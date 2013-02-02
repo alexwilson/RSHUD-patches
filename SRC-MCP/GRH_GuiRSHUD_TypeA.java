@@ -452,13 +452,13 @@ public class GRH_GuiRSHUD_TypeA extends GRH_GuiRSHUDConfigure
         {
             // AMMO
             int cammo = 0;
-            List<Integer> clist = projectorList.get(is.getItem().shiftedIndex);
+            List<Integer> clist = projectorList.get(is.getItem().itemID);
 
             for (int li1 = 0; li1 < mcpl.inventory.mainInventory.length; li1++)
             {
                 is = mcpl.inventory.mainInventory[li1];
 
-                if (is != null && clist.contains(is.getItem().shiftedIndex))
+                if (is != null && clist.contains(is.getItem().itemID))
                 {
                     cammo += is.stackSize;
                 }

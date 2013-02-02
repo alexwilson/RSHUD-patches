@@ -454,7 +454,7 @@ public class GRV_GuiRSHUD_ACV extends GRH_GuiRSHUDConfigure
         {
             valAmmo = countAmmo(itemstack, mcpl);
             float maxammo = (float)itemstack.getMaxDamage();
-            maxammo = maxammo > 0 ? maxammo : (float)Item.itemsList[projectorList.get(itemstack.getItem().shiftedIndex).get(0)].maxStackSize;
+            maxammo = maxammo > 0 ? maxammo : (float)Item.itemsList[projectorList.get(itemstack.getItem().itemID).get(0)].maxStackSize;
             maxammo = (float)valAmmo / maxammo;
             colAmmo = getTextColor(maxammo, 0.3F, 0.1F);
             setGLTextColor(colAmmo, 0.5F);

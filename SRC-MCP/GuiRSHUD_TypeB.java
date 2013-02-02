@@ -542,7 +542,7 @@ public class GuiRSHUD_TypeB extends GRH_GuiRSHUDConfigure
         {
             if (minecraft.renderViewEntity.isPotionActive(Potion.poison))
             {
-                String s20 = "ALEART POISON!";
+                String s20 = "ALERT POISON!";
                 minecraft.fontRenderer.drawString(s20, (int)d - minecraft.fontRenderer.getStringWidth(s20) / 2, (int)d1 - 60, ColorInt_Alert);
             }
 
@@ -550,14 +550,14 @@ public class GuiRSHUD_TypeB extends GRH_GuiRSHUDConfigure
 
             if (((EntityPlayer)(entityplayersp)).health < 9)
             {
-                String s21 = "ALEART HEALTH";
+                String s21 = "ALERT HEALTH";
                 int k7 = ((EntityPlayer)(entityplayersp)).health >= 5 ? ColorInt_Warning : ColorInt_Alert;
                 minecraft.fontRenderer.drawString(s21, (int)d - minecraft.fontRenderer.getStringWidth(s21) / 2, (int)d1 - 80, k7);
             }
 
             if (((EntityPlayer)(entityplayersp)).foodStats.getFoodLevel() < 7)
             {
-                String s22 = "ALEART FOOD";
+                String s22 = "ALERT FOOD";
                 int l7 = ((EntityPlayer)(entityplayersp)).health >= 5 ? ColorInt_Warning : ColorInt_Alert;
                 minecraft.fontRenderer.drawString(s22, (int)d - minecraft.fontRenderer.getStringWidth(s22) / 2, (int)d1 - 70, l7);
             }
@@ -584,16 +584,16 @@ public class GuiRSHUD_TypeB extends GRH_GuiRSHUDConfigure
             minecraft.fontRenderer.drawString(s23, ((int)d - minecraft.fontRenderer.getStringWidth(s23)) + 60, (int)d1 + 63, l8);
         }
 
-        if (itemstack != null && projectorList.containsKey(Integer.valueOf(itemstack.getItem().shiftedIndex)))
+        if (itemstack != null && projectorList.containsKey(Integer.valueOf(itemstack.getItem().itemID)))
         {
             int j8 = 0;
-            List list = (List)projectorList.get(Integer.valueOf(itemstack.getItem().shiftedIndex));
+            List list = (List)projectorList.get(Integer.valueOf(itemstack.getItem().itemID));
 
             for (int j9 = 0; j9 < ((EntityPlayer)(entityplayersp)).inventory.mainInventory.length; j9++)
             {
                 itemstack = ((EntityPlayer)(entityplayersp)).inventory.mainInventory[j9];
 
-                if (itemstack != null && list.contains(Integer.valueOf(itemstack.getItem().shiftedIndex)))
+                if (itemstack != null && list.contains(Integer.valueOf(itemstack.getItem().itemID)))
                 {
                     j8 += itemstack.stackSize;
                 }

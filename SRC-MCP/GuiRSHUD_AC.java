@@ -572,16 +572,16 @@ public class GuiRSHUD_AC extends GRH_GuiRSHUDConfigure
             minecraft.fontRenderer.drawString(s22, ((int)d - minecraft.fontRenderer.getStringWidth(s22)) + 60, j - 58, k7);
         }
 
-        if (itemstack != null && projectorList.containsKey(Integer.valueOf(itemstack.getItem().shiftedIndex)))
+        if (itemstack != null && projectorList.containsKey(Integer.valueOf(itemstack.getItem().itemID)))
         {
             int i7 = 0;
-            List list = (List)projectorList.get(Integer.valueOf(itemstack.getItem().shiftedIndex));
+            List list = (List)projectorList.get(Integer.valueOf(itemstack.getItem().itemID));
 
             for (int i8 = 0; i8 < ((EntityPlayer)(entityplayersp)).inventory.mainInventory.length; i8++)
             {
                 itemstack = ((EntityPlayer)(entityplayersp)).inventory.mainInventory[i8];
 
-                if (itemstack != null && list.contains(Integer.valueOf(itemstack.getItem().shiftedIndex)))
+                if (itemstack != null && list.contains(Integer.valueOf(itemstack.getItem().itemID)))
                 {
                     i7 += itemstack.stackSize;
                 }

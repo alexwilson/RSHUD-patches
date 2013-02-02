@@ -53,7 +53,7 @@ public class GRH_GuiContainerRSHUD extends GuiContainer
                 {
                     if (list1.get(j) != null)
                     {
-                        list2.add(list1.get(j).getItem().shiftedIndex);
+                        list2.add(list1.get(j).getItem().itemID);
                     }
                 }
 
@@ -62,13 +62,13 @@ public class GRH_GuiContainerRSHUD extends GuiContainer
                     continue;
                 }
 
-                if (GRH_GuiRSHUDConfigure.projectorList.containsKey(list1.get(0).getItem().shiftedIndex))
+                if (GRH_GuiRSHUDConfigure.projectorList.containsKey(list1.get(0).getItem().itemID))
                 {
-                    GRH_GuiRSHUDConfigure.projectorList.get(list1.get(0).getItem().shiftedIndex).addAll(list2);
+                    GRH_GuiRSHUDConfigure.projectorList.get(list1.get(0).getItem().itemID).addAll(list2);
                 }
                 else
                 {
-                    GRH_GuiRSHUDConfigure.projectorList.put(list1.get(0).getItem().shiftedIndex, list2);
+                    GRH_GuiRSHUDConfigure.projectorList.put(list1.get(0).getItem().itemID, list2);
                 }
             }
         }

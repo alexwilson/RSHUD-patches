@@ -84,7 +84,7 @@ public class GRH_ContainerRSHUD extends ContainerCreative
 
             if (var5 != null && var5.getCreativeTab() != null)
             {
-                var5.getSubItems(var5.shiftedIndex, (CreativeTabs)null, this.itemList);
+                var5.getSubItems(var5.itemID, (CreativeTabs)null, this.itemList);
             }
         }
     }

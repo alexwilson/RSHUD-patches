@@ -136,19 +136,19 @@ public class GRH_GuiRSHUDConfigure extends GuiScreen
 
     public boolean containsAmmo(ItemStack itemstack)
     {
-        return itemstack != null && projectorList.containsKey(itemstack.getItem().shiftedIndex);
+        return itemstack != null && projectorList.containsKey(itemstack.getItem().itemID);
     }
 
     public int countAmmo(ItemStack itemstack, EntityPlayer entityplayer)
     {
         int count = 0;
-        List<Integer> clist = projectorList.get(itemstack.getItem().shiftedIndex);
+        List<Integer> clist = projectorList.get(itemstack.getItem().itemID);
 
         for (int li1 = 0; li1 < entityplayer.inventory.mainInventory.length; li1++)
         {
             ItemStack itemstack2 = entityplayer.inventory.mainInventory[li1];
 
-            if (itemstack2 != null && clist.contains(itemstack2.getItem().shiftedIndex))
+            if (itemstack2 != null && clist.contains(itemstack2.getItem().itemID))
             {
                 count += itemstack2.stackSize;
             }

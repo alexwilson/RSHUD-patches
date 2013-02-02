@@ -20,7 +20,7 @@ public class mod_GRV_RSHUD_ACV extends BaseMod
     public static float LowGain = 0.3F;
     @MLProp(info = "Marker Color.")
     public static float TextSize = 0.5F;
-    @MLProp(info = "RECON's ItemID.(ShiftIndex = ItemID - 256, 0 is not use.)", max = 31999)
+    @MLProp(info = "RECON's ItemID.(itemID = ItemID - 256, 0 is not use.)", max = 31999)
     public static int itemIDRECON = 22250;
     @MLProp(info = "Show Status Massage")
     public static boolean Show_Status = true;
@@ -32,7 +32,7 @@ public class mod_GRV_RSHUD_ACV extends BaseMod
     @Override
     public String getVersion()
     {
-        return "1.4.5";
+        return "1.4.7";
     }
 
     @Override
@@ -133,7 +133,7 @@ public class mod_GRV_RSHUD_ACV extends BaseMod
     @Override
     public Packet23VehicleSpawn getSpawnPacket(Entity var1, int var2)
     {
-        EntityLiving lthrower = ((GRV_EntityRECON)var1).func_85052_h();
+        EntityLiving lthrower = ((GRV_EntityRECON)var1).getThrower();
         return new GRV_PacketRECONSpawn(var1, 0, lthrower == null ? 0 : lthrower.entityId);
     }
 }
